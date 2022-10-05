@@ -11,7 +11,9 @@ class PageController extends Controller
 	{
         $search = $request->search;
 
-        $posts = Post::Where('title','LIKE',"%{$search}%")->latest()->paginate();
+        $posts = Post::Where('title','LIKE',"%{$search}%")
+        ->with('user')
+        ->latest()->paginate();
     	return view('home', ['posts' => $posts]);
     }
 
